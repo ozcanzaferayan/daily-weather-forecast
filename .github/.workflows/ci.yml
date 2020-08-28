@@ -1,0 +1,12 @@
+name: onPush
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Get Weather
+    steps:
+      - name: Get Weather
+        shell: zsh
+        run: chmod +x ./src/getWeather.sh && ./src/getWeather.sh
