@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Get Weather
     steps:
+      - uses: actions/checkout@v2
       - name: Get Weather
         shell: bash
         run: chmod +x ./src/getWeather.sh && ./src/getWeather.sh
