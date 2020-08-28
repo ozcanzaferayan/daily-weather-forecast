@@ -7,12 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Get Weather
     steps:
-      - name: Install dependencies
-        run: sudo apt-get install zsh
-      - name: Display the path
-        run: |
-          echo $ZSH_NAME $ZSH_VERSION
-        shell: zsh {0}
-      # - name: Get Weather
-      #   shell: bash
-      #   run: chmod +x ./src/getWeather.sh && ./src/getWeather.sh
+      - name: Get Weather
+        shell: bash
+        run: chmod +x ./src/getWeather.sh && ./src/getWeather.sh

@@ -51,10 +51,10 @@ hourCount=$(getHourCountFromTahmin tahmin.json)
 tahmin=$(cat tahmin.json)
 for ((i=1; i<$hourCount; i++))
 do
-  read -A arr < <(echo $(echo $tahmin | jq -r --arg i $i '.[$i|tonumber] | .tarih, .hadise, .sicaklik'))
-  date=${arr[1]}
-  weatherLetters=${arr[2]}
-  temp=${arr[3]}
+  read -a arr < <(echo $(echo $tahmin | jq -r --arg i $i '.[$i|tonumber] | .tarih, .hadise, .sicaklik'))
+  date=${arr[0]}
+  weatherLetters=${arr[1]}
+  temp=${arr[2]}
   hour=$(gdate --date="$date" +%R)
   weatherText=$(getWeatherStatusFromLetters $weatherLetters)
   echo $hour $temp"ºC" $weatherText
