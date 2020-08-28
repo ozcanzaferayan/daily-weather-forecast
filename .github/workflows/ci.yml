@@ -9,5 +9,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Get Weather
-        shell: bash
+        shell: zsh
         run: chmod +x ./src/getWeather.sh && ./src/getWeather.sh
