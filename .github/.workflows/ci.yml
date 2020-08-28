@@ -8,5 +8,5 @@ jobs:
     name: Get Weather
     steps:
       - name: Get Weather
-        shell: zsh
+        shell: bash
         run: chmod +x ./src/getWeather.sh && ./src/getWeather.sh
