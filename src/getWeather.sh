@@ -57,5 +57,5 @@ do
   temp=${arr[2]}
   hour=$(gdate --date="$date" +%R)
   weatherText=$(getWeatherStatusFromLetters $weatherLetters)
-  echo $hour $temp"ºC" $weatherText
+  echo $hour $temp"ºC" $weatherText >> sms.txt
 done

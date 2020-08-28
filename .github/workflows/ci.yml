@@ -11,3 +11,8 @@ jobs:
       - name: Get Weather
         shell: bash
         run: chmod +x ./src/getWeather.sh && ./src/getWeather.sh
+      - name: Upload files
+        uses: actions/upload-artifact@v2
+        with:
+          name: sms
+          path: sms.txt
