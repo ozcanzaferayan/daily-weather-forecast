@@ -7,26 +7,26 @@ jobs:
     runs-on: ubuntu-latest
     name: Get Weather
     steps:
-      - uses: actions/checkout@v2
-      - name: Get Weather
-        shell: bash
-        run: chmod +x ./src/getWeather.sh && ./src/getWeather.sh
+      # - uses: actions/checkout@v2
+      # - name: Get Weather
+      #   shell: bash
+      #   run: chmod +x ./src/getWeather.sh && ./src/getWeather.sh
       - name: SMS text
         shell: bash
         run: |
-          echo "$SMS_TEXT"
+          echo "::set-env name=SMS_TEXT::$(cat sms.txt)"
       - name: 'Sending SMS Notification'
         uses: twilio-labs/actions-sms@v1
         with:
           fromPhoneNumber: ${{ secrets.MSISDN_SENDER }}
           toPhoneNumber: ${{ secrets.MSISDN_RECEIVER }}
-          message: "\nHava Durumu\n${{env.SMS_TEXT}}"
+          message: "${{env.SMS_TEXT}}"
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_API_KEY: ${{ secrets.TWILIO_API_KEY }}
           TWILIO_API_SECRET: ${{ secrets.TWILIO_API_SECRET }}
-      - name: Upload files
-        uses: actions/upload-artifact@v2
-        with:
-          name: sms
-          path: sms.txt
+      # - name: Upload files
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: sms
+      #     path: sms.txt
