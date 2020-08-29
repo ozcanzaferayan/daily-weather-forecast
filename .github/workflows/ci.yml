@@ -1,4 +1,4 @@
-name: onPush
+name: daily
 
 on:
   schedule:
