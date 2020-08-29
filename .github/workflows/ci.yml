@@ -16,12 +16,13 @@ jobs:
         run: |
           cat sms.txt
           echo "::set-env name=SMS_TEXT::$(cat sms.txt)"
+          echo $SMS_TEXT
       - name: 'Sending SMS Notification'
         uses: twilio-labs/actions-sms@v1
         with:
           fromPhoneNumber: ${{ secrets.MSISDN_SENDER }}
           toPhoneNumber: ${{ secrets.MSISDN_RECEIVER }}
-          message: echo $SMS_TEXT
+          message: $SMS_TEXT
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_API_KEY: ${{ secrets.TWILIO_API_KEY }}
