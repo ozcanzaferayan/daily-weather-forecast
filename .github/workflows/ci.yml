@@ -13,7 +13,7 @@ jobs:
         run: chmod +x ./src/getWeather.sh && ./src/getWeather.sh
       - name: SMS text
         shell: bash
-        run: echo $SMS_TEXT
+        run: eval "$SMS_TEXT"
       - name: 'Sending SMS Notification'
         uses: twilio-labs/actions-sms@v1
         with:
