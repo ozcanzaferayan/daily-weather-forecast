@@ -20,7 +20,7 @@ jobs:
             --data-urlencode "Body=Please submit a picture of the incident to start a work order request" \
             --data-urlencode "From=${{ secrets.MSISDN_SENDER }}" \
             --data-urlencode "To=${{ secrets.MSISDN_RECEIVER }}" \
-            -u ${{ secrets.TWILIO_API_KEY }}:${{ secrets.TWILIO_API_KEY }}
+            -u ${{ secrets.TWILIO_ACCOUNT_SID }}:${{ secrets.TWILIO_AUTH_TOKEN }}
       # - name: 'Sending SMS Notification'
       #   uses: twilio-labs/actions-sms@v1
       #   with:
