@@ -14,7 +14,7 @@ jobs:
       - name: SMS text
         shell: bash
         run: |
-          eval "$SMS_TEXT"
+          echo "$SMS_TEXT"
       - name: 'Sending SMS Notification'
         uses: twilio-labs/actions-sms@v1
         with:
