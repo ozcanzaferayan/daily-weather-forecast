@@ -59,7 +59,8 @@ getDailyWeatherForecast "$istNo" > forecast.json
 getTahminArray forecast.json > tahmin.json
 hourCount=$(getHourCountFromTahmin tahmin.json)
 tahmin=$(cat tahmin.json)
-echo "_\n$CITY Hava durumu" >> sms.txt
+echo "-" >> sms.txt
+echo "$CITY Hava durumu" >> sms.txt
 for ((i=1; i<$hourCount; i++))
 do
   read -a arr < <(echo $(echo $tahmin | jq -r --arg i $i '.[$i|tonumber] | .tarih, .hadise, .sicaklik'))
