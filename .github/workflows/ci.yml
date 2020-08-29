@@ -14,13 +14,13 @@ jobs:
       - name: Create SMS
         shell: bash
         run: |
-          echo "Dockerfile" > DOCKERFILE_NAME
+          echo "::set-env name=ADI::zafer"
       - name: 'Sending SMS Notification'
         uses: twilio-labs/actions-sms@v1
         with:
           fromPhoneNumber: ${{ secrets.MSISDN_SENDER }}
           toPhoneNumber: ${{ secrets.MSISDN_RECEIVER }}
-          message: $(cat ./asd.txt)
+          message: "${{env.ADI}}"
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_API_KEY: ${{ secrets.TWILIO_API_KEY }}
