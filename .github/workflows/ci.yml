@@ -14,18 +14,15 @@ jobs:
       - name: Create SMS
         shell: bash
         run: |
-          smsText=$(cat sms.txt)
+          smsText="zafer"
           echo "::set-env name=SMS_TEXT::$smsText"
           echo $SMS_TEXT
       - name: 'Sending SMS Notification'
         uses: twilio-labs/actions-sms@v1
-        shell: bash
-        run: |
-          adim="zafer"
         with:
           fromPhoneNumber: ${{ secrets.MSISDN_SENDER }}
           toPhoneNumber: ${{ secrets.MSISDN_RECEIVER }}
-          message: $adim
+          message: $SMS_TEXT
         env:
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
           TWILIO_API_KEY: ${{ secrets.TWILIO_API_KEY }}
