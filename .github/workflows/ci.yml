@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Get Weather
     steps:
-      # - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       # - name: Get Weather
       #   shell: bash
       #   run: chmod +x ./src/getWeather.sh && ./src/getWeather.sh
@@ -17,7 +17,7 @@ jobs:
           BASE_URL='https://api.twilio.com'
           echo "::set-env name=SMS_TEXT::$(echo 'zaferayan')"
           curl -X POST ${BASE_URL}/2010-04-01/Accounts/${{ secrets.TWILIO_ACCOUNT_SID }}/Messages.json \
-            --data-urlencode "Body=Please submit a picture of the incident to start a work order request" \
+            --data-urlencode "Body=$(cat sms.txt)" \
             --data-urlencode "From=${{ secrets.MSISDN_SENDER }}" \
             --data-urlencode "To=${{ secrets.MSISDN_RECEIVER }}" \
             -u ${{ secrets.TWILIO_ACCOUNT_SID }}:${{ secrets.TWILIO_AUTH_TOKEN }}
