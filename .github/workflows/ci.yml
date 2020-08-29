@@ -15,7 +15,7 @@ jobs:
         shell: bash
         run: |
           smsText="zafer"
-          echo "::set-env name=SMS_TEXT::$smsText"
+          echo "::set-env name=SMS_TEXT::$(echo zafer)"
           echo $SMS_TEXT
       - name: 'Sending SMS Notification'
         uses: twilio-labs/actions-sms@v1
