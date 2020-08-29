@@ -22,6 +22,7 @@ jobs:
           TWILIO_API_SECRET: ${{ secrets.TWILIO_API_SECRET }}
           MSISDN_SENDER: ${{ secrets.MSISDN_SENDER }}
           MSISDN_RECEIVER: ${{ secrets.MSISDN_RECEIVER }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
       # - name: 'Sending SMS Notification'
       #   uses: twilio-labs/actions-sms@v1
       #   with:
