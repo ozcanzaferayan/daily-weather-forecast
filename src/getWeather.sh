@@ -12,7 +12,7 @@ getHourCountFromTahmin () {
 
 getWeatherStatusFromLetters () {
   weatherStatus=$(case $1 in
-    A) echo Açık;;
+    A) echo "☀️";;
     AB) echo Az Bulutlu;;
     PB) echo Parçalı Bulutlu;;
     CB) echo Çok Bulutlu;;
