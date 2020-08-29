@@ -14,7 +14,14 @@ jobs:
       - name: SMS text
         shell: bash
         run: chmod +x ./src/sendSms.sh && ./src/sendSms.sh
-
+        env:
+          CI: true
+          API_KEY: ${{ secrets.API_KEY }}
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_API_KEY: ${{ secrets.TWILIO_API_KEY }}
+          TWILIO_API_SECRET: ${{ secrets.TWILIO_API_SECRET }}
+          MSISDN_SENDER: ${{ secrets.MSISDN_SENDER }}
+          MSISDN_RECEIVER: ${{ secrets.MSISDN_RECEIVER }}
       # - name: 'Sending SMS Notification'
       #   uses: twilio-labs/actions-sms@v1
       #   with:
