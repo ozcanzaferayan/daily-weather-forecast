@@ -11,6 +11,9 @@ jobs:
       - name: Get Weather
         shell: bash
         run: chmod +x ./src/getWeather.sh && ./src/getWeather.sh
+        env:
+          CI: true
+          CITY: balıkesir
       - name: SMS text
         shell: bash
         run: chmod +x ./src/sendSms.sh && ./src/sendSms.sh

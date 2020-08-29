@@ -53,13 +53,13 @@ getWeatherStatusFromLetters () {
   esac
 }
 
-getCity "istanbul"> city.json
+getCity $CITY > city.json
 istNo=$(getIstNo city.json)
 getDailyWeatherForecast "$istNo" > forecast.json
 getTahminArray forecast.json > tahmin.json
 hourCount=$(getHourCountFromTahmin tahmin.json)
 tahmin=$(cat tahmin.json)
-echo "Hava durumu" >> sms.txt
+echo "_\n$CITY Hava durumu" >> sms.txt
 for ((i=1; i<$hourCount; i++))
 do
   read -a arr < <(echo $(echo $tahmin | jq -r --arg i $i '.[$i|tonumber] | .tarih, .hadise, .sicaklik'))
