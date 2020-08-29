@@ -13,7 +13,7 @@ jobs:
         run: chmod +x ./src/getWeather.sh && ./src/getWeather.sh
         env:
           CI: true
-          CITY: balıkesir
+          CITY: "balıkesir"
       - name: SMS text
         shell: bash
         run: chmod +x ./src/sendSms.sh && ./src/sendSms.sh
