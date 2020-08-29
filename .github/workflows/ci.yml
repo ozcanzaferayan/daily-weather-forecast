@@ -14,8 +14,8 @@ jobs:
       - name: Create SMS
         shell: bash
         run: |
-          cat sms.txt
-          echo "::set-env name=SMS_TEXT::$(cat sms.txt)"
+          smsText=$(cat sms.txt)
+          echo "::set-env name=SMS_TEXT::$smsText"
           echo $SMS_TEXT
       - name: 'Sending SMS Notification'
         uses: twilio-labs/actions-sms@v1
