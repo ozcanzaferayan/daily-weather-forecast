@@ -1,5 +1,14 @@
+
+getCity () {
+  curl -H "Origin:https://mgm.gov.tr" https://servis.mgm.gov.tr/web/merkezler?il=$1
+}
+
+getIstNo () {
+  cat "$1" |jq -r '.[] | .saatlikTahminIstNo'
+}
+
 getDailyWeatherForecast () {
-  curl -H "Origin:https://mgm.gov.tr" https://servis.mgm.gov.tr/web/tahminler/saatlik\?istno\=17060
+  curl -H "Origin:https://mgm.gov.tr" https://servis.mgm.gov.tr/web/tahminler/saatlik\?istno\=$1
 }
 
 getTahminArray () {
@@ -10,42 +19,50 @@ getHourCountFromTahmin () {
   cat "$1" |jq -r 'length'
 }
 
+case $ans in
+A) echo "The sum of $a and $b is $x & exit" ;;
+2) echo "The subtraction of $a and $b is $y & exit" ;;
+3) echo "The multiplication of $a and $b is $z & exit" ;;
+*) echo "Invalid entry"
+esac
+
 getWeatherStatusFromLetters () {
-  weatherStatus=$(case $1 in
-    A) echo "☀️";;
-    AB) echo Az Bulutlu;;
-    PB) echo Parçalı Bulutlu;;
-    CB) echo Çok Bulutlu;;
-    HY) echo Hafif Yağmurlu;;
-    Y) echo Yağmurlu;;
-    KY) echo Kuvvetli Yağmurlu;;
-    KKY) echo Karla Karışık Yağmurlu;;
-    HKY) echo Hafif Kar Yağışlı;;
-    K) echo Kar Yağışlı;;
-    YKY) echo Yoğun Kar Yağışlı;;
-    HSY) echo Hafif Sağanak Yağışlı;;
-    SY) echo Sağanak Yağışlı;;
-    KSY) echo Kuvvetli Sağanak Yağışlı;;
-    MSY) echo Mevzi Sağanak Yağışlı;;
-    DY) echo Dolu;;
-    GSY) echo Gökgürültülü Sağanak Yağışlı;;
-    KGY) echo Kuvvetli Gökgürültülü Sağanak Yağışlı;;
-    SIS) echo Sisli;;
-    PUS) echo Puslu;;
-    DMN) echo Dumanlı;;
-    KF) echo Kum veya Toz Taşınımı;;
-    R) echo Rüzgarlı;;
-    GKR) echo Güneyli Kuvvetli Rüzgar;;
-    KKR) echo Kuzeyli Kuvvetli Rüzgar;;
-    SCK) echo Sıcak;;
-    SGK) echo Soğuk;;
-    HHY) echo Yağışlı;;
+  case $1 in
+    A) echo "☀️";;#Açık
+    AB) echo "🌤";;#Az Bulutlu;;
+    PB) echo "⛅️";;#Parçalı Bulutlu;;
+    CB) echo "☁️";;#Çok Bulutlu;;
+    HY) echo "🌦";;#Hafif Yağmurlu;;
+    Y) echo "🌧";;#Yağmurlu;;
+    KY) echo "🌧";;#Kuvvetli Yağmurlu;;
+    KKY) echo "🌨";;#Karla Karışık Yağmurlu;;
+    HKY) echo "🌨";;#Hafif Kar Yağışlı;;
+    K) echo "❄️";;#Kar Yağışlı;;
+    YKY) echo "🌨";;#Yoğun Kar Yağışlı;;
+    HSY) echo "🌦";;#Hafif Sağanak Yağışlı;;
+    SY) echo "🌧";;#Sağanak Yağışlı;;
+    KSY) echo "🌧";;#Kuvvetli Sağanak Yağışlı;;
+    MSY) echo "🌧";;#Mevzi Sağanak Yağışlı;;
+    DY) echo "🌨";;#Dolu;;
+    GSY) echo "⛈";;#Gökgürültülü Sağanak Yağışlı;;
+    KGY) echo "⛈";;#Kuvvetli Gökgürültülü Sağanak Yağışlı;;
+    SIS) echo "🌫";;#Sisli;;
+    PUS) echo "🌫";;#Puslu;;
+    DMN) echo "🌫";;#Dumanlı;;
+    KF) echo "🌫";;#Kum veya Toz Taşınımı;;
+    R) echo "💨";;#Rüzgarlı;;
+    GKR) echo "💨";;#Güneyli Kuvvetli Rüzgar;;
+    KKR) echo "💨";;#Kuzeyli Kuvvetli Rüzgar;;
+    SCK) echo "🥵";;#Sıcak;;
+    SGK) echo "🥶";;#Soğuk;;
+    HHY) echo "🌧";; #Yağışlı;;
     *) echo Bilinmiyor;;
-  esac)
-  echo $weatherStatus
+  esac
 }
 
-getDailyWeatherForecast > forecast.json
+getCity "istanbul"> city.json
+istNo=$(getIstNo city.json)
+getDailyWeatherForecast "$istNo" > forecast.json
 getTahminArray forecast.json > tahmin.json
 hourCount=$(getHourCountFromTahmin tahmin.json)
 tahmin=$(cat tahmin.json)
