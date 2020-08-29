@@ -8,9 +8,9 @@ jobs:
     name: Get Weather
     steps:
       - uses: actions/checkout@v2
-      # - name: Get Weather
-      #   shell: bash
-      #   run: chmod +x ./src/getWeather.sh && ./src/getWeather.sh
+      - name: Get Weather
+        shell: bash
+        run: chmod +x ./src/getWeather.sh && ./src/getWeather.sh
       - name: SMS text
         shell: bash
         run: |
