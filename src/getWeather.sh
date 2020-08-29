@@ -19,13 +19,6 @@ getHourCountFromTahmin () {
   cat "$1" |jq -r 'length'
 }
 
-case $ans in
-A) echo "The sum of $a and $b is $x & exit" ;;
-2) echo "The subtraction of $a and $b is $y & exit" ;;
-3) echo "The multiplication of $a and $b is $z & exit" ;;
-*) echo "Invalid entry"
-esac
-
 getWeatherStatusFromLetters () {
   case $1 in
     A) echo "☀️Açık";;
@@ -66,6 +59,7 @@ getDailyWeatherForecast "$istNo" > forecast.json
 getTahminArray forecast.json > tahmin.json
 hourCount=$(getHourCountFromTahmin tahmin.json)
 tahmin=$(cat tahmin.json)
+echo "Hava durumu" >> sms.txt
 for ((i=1; i<$hourCount; i++))
 do
   read -a arr < <(echo $(echo $tahmin | jq -r --arg i $i '.[$i|tonumber] | .tarih, .hadise, .sicaklik'))
