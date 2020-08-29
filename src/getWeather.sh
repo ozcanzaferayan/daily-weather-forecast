@@ -59,4 +59,4 @@ do
   weatherText=$(getWeatherStatusFromLetters $weatherLetters)
   echo $hour $temp"ºC" $weatherText >> sms.txt
 done
-echo "::set-env name=SMS_TEXT::$(cat sms.txt)"
+echo "::set-env name=SMS_TEXT::$(cat sms.txt | paste -sd " " -)"
