@@ -1,9 +1,9 @@
 name: daily
 
-on:
-  schedule:
-    # Execute CI at Turkey Timezone 08:00 (UTC + 3)
-    - cron: '0 5 * * *'
+on: [push]
+  # schedule:
+  #   # Execute CI at Turkey Timezone 08:00 (UTC + 3)
+  #   - cron: '0 5 * * *'
 
 jobs:
   build:
@@ -22,23 +22,10 @@ jobs:
         run: chmod +x ./src/sendSms.sh && ./src/sendSms.sh
         env:
           CI: true
-          API_KEY: ${{ secrets.API_KEY }}
           TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
-          TWILIO_API_KEY: ${{ secrets.TWILIO_API_KEY }}
-          TWILIO_API_SECRET: ${{ secrets.TWILIO_API_SECRET }}
           MSISDN_SENDER: ${{ secrets.MSISDN_SENDER }}
-          MSISDN_RECEIVER: ${{ secrets.MSISDN_RECEIVER }}
+          MSISDN_RECEIVERS_DELIMITED_WITH_SEMICOLON: ${{ secrets.MSISDN_RECEIVERS_DELIMITED_WITH_SEMICOLON }}
           TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
-      # - name: 'Sending SMS Notification '
-      #   uses: twilio-labs/actions-sms@v1
-      #   with:
-      #     fromPhoneNumber: ${{ secrets.MSISDN_SENDER }}
-      #     toPhoneNumber: ${{ secrets.MSISDN_RECEIVER }}
-      #     message: ${{$(cat sms.txt)}}"
-      #   env:
-      #     TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
-      #     TWILIO_API_KEY: ${{ secrets.TWILIO_API_KEY }}
-      #     TWILIO_API_SECRET: ${{ secrets.TWILIO_API_SECRET }}
       - name: Upload files
         uses: actions/upload-artifact@v2
         with:
