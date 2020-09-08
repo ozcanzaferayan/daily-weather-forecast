@@ -22,7 +22,7 @@ getHourCountFromTahmin () {
 getWeatherStatusFromLetters () {
   case $1 in
     A) echo "☀️Açık";;
-    AB) echo "🌤Az Bulutlu";;
+    AB) echo "🌤Az Bulutlu";
     PB) echo "⛅️Parçalı Bulutlu";;
     CB) echo "☁️Çok Bulutlu";;
     HY) echo "🌦Hafif Yağmurlu";;
