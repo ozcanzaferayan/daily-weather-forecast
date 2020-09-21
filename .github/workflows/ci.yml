@@ -2,8 +2,8 @@ name: daily
 
 on:
   schedule:
-    # Execute CI at Turkey Timezone 08:00 (UTC + 3)
-    - cron: '30 5 * * *'
+    # Execute CI at Turkey Timezone 07:00 (UTC + 3)
+    - cron: '00 4 * * *'
 
 jobs:
   build:
